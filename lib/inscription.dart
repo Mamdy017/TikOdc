@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -16,16 +17,19 @@ class PageInscription extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
+        title:const Center(
           child: Text(
             "Profile",
             style: TextStyle(color: Colors.black, fontSize: 18),
           ),
         ),
-        actions: [
-          Icon(
-            FontAwesomeIcons.list,
-            color: Colors.black,
+        actions:const [
+          Padding(
+            padding: EdgeInsets.only(right:12.0),
+            child: Icon(
+              FontAwesomeIcons.list,
+              color: Colors.black,
+            ),
           )
         ],
       ),
@@ -33,131 +37,113 @@ class PageInscription extends StatelessWidget {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(
+             const SizedBox(
               height: 30,
             ),
-            Stack(children: [
+            Stack(children: const[
               CircleAvatar(
-                minRadius: 25,
-                maxRadius: 50,
+                radius: 45,
+                backgroundColor: Colors.grey,
                 child: Icon(
                   Icons.camera_alt,
-                  color: Colors.grey,
+                  color: Colors.black,
                   size: 50.0,
                 ),
               ),
             ]),
-            SizedBox(
+             const SizedBox(
               height: 10.0,
             ),
-            Text("@Nom d'utilisateur"),
-            Container(
-              height: 60,
+            const Text("@Nom d'utilisateur"),
+            Padding(
+              padding: const EdgeInsets.only(right: 30, left: 30, top: 10),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Text(
-                      "0",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w600),
+                mainAxisAlignment:  MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      child: Column(
+                          children: const [
+                            Text(
+                              "0",
+                              style: TextStyle(
+                                  color: Colors.black, fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              width: 65,
+                            ),
+                            Text(
+                              "Abonnement",
+                              style: TextStyle(fontSize: 12),
+                            )
+                          ]),
                     ),
-                    SizedBox(
-                      width: 65,
-                    ),
-                    Text(
-                      "",
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      "0",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      width: 55,
-                    ),
-                    Text(
-                      "",
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "0",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.w600),
-                    )
-                  ]),
-            ),
-            Container(
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    Text(
-                      "Abonnements",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 10.0),
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "",
-                    ),
-                    Text(
-                      "Abonnées",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 10.0),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      "",
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Text(
-                      "J'aime",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w100,
-                          fontSize: 10.0),
-                    )
-                  ]),
+                  ),
+                
+              Expanded(
+                child: Container(
+                  child: Column(
+                      children: const [
+                        Text(
+                          "0",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          width: 65,
+                        ),
+                        Text(
+                          "Abonnées",
+                          style: TextStyle(fontSize: 12),
+                        )
+                      ]),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                      children: const [
+                        Text(
+                          "0",
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          width: 65,
+                        ),
+                        Text(
+                          "J'aime",
+                          style: TextStyle(fontSize: 12),
+                        )
+                      ]),
+                ),
+              ),
+
+              ],
+              ),
             ),
             SizedBox(
               height: 80.0,
             ),
-            Text(
-              "Connecter ou créér un compte",
-              style: TextStyle(
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w900,
-                fontSize: 15,
-              ),
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
-            Text(
-              "Connecter ou créér un compte",
-              style: TextStyle(
-                color: Color.fromARGB(51, 0, 0, 0),
-                fontWeight: FontWeight.w100,
-              ),
-            ),
-            SizedBox(
-              height: 20.0,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                 SizedBox(width: 20, height: 70,),
+                 DefaultTextStyle(style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.grey[800],
+                  fontWeight: FontWeight.w600,
+                  
+                 ), child: AnimatedTextKit(
+                  animatedTexts: [
+                    RotateAnimatedText("Connecter ou créér un compte",),
+                    RotateAnimatedText("Connecter ou créér un compte1",),
+                    RotateAnimatedText("Connecter ou créér un compte2",)
+                  ]
+                  ))
+              ],
             ),
             SizedBox(
               width: 300.0,

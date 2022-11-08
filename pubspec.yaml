@@ -1,4 +1,4 @@
-name: odc_tik
+name: TIKODC
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -70,6 +70,7 @@ dependencies:
   tab_container: ^2.0.0
   country_picker: ^2.0.16
   fl_country_code_picker: ^0.0.4
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:odc_tik/amis.dart';
+import 'package:TIKODC/amis.dart';
 import 'Accueil.dart';
 import 'creation.dart';
 import 'inbox.dart';
