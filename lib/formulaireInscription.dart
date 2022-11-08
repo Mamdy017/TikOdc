@@ -1,4 +1,5 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,33 +27,35 @@ class _PageFormulaireInscriptionState extends State<PageFormulaireInscription> {
         primaryColor: Colors.white,
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+          ),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Center(
+            child: Text(
+              "S'inscrire",
+              style: TextStyle(color: Colors.black, fontSize: 18),
+            ),
+          ),
+          actions: [
+            Icon(
+              CupertinoIcons.question_circle,
+              color: Colors.black,
+            )
+          ],
+        ),
         body: Container(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
                   Widget>[
-            SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    FontAwesomeIcons.leftLong,
-                  ),
-                ),
-                Text(
-                  "S'inscrire",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    decorationColor: Colors.white,
-                  ),
-                ),
-                Icon(
-                  FontAwesomeIcons.circleQuestion,
-                ),
-              ],
-            ),
+            SizedBox(height: 30.0),
             DefaultTabController(
                 length: 2, // length of tabs
                 initialIndex: 0,
@@ -75,159 +78,210 @@ class _PageFormulaireInscriptionState extends State<PageFormulaireInscription> {
                       ),
                       Container(
                           height: 290, //height of TabBarView
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  top: BorderSide(
-                                      color: Colors.grey, width: 0.5))),
+
                           child: TabBarView(children: <Widget>[
-                            Column(
-                              children: [
-                                Container(
-                                  child: Center(
-                                    child: TextFormField(
-                                      controller: phoneNumberController,
-                                      keyboardType: TextInputType.number,
-                                      textInputAction: TextInputAction.done,
-                                      maxLines: 1,
-                                      decoration: InputDecoration(
-                                        border: UnderlineInputBorder(),
-                                        labelText: 'Numéro de téléphone',
-                                        prefixIcon: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 15,
-                                            vertical: 6,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: Center(
+                                      child: TextFormField(
+                                        controller: phoneNumberController,
+                                        keyboardType: TextInputType.number,
+                                        textInputAction: TextInputAction.done,
+                                        maxLines: 1,
+                                        decoration: InputDecoration(
+                                          border: UnderlineInputBorder(),
+                                          hintText: 'Numéro de téléphone',
+                                          prefixIcon: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 1,
+                                              vertical: 6,
+                                            ),
+                                            margin: const EdgeInsets.symmetric(
+                                                horizontal: 0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () async {
+                                                    final code =
+                                                        await countryPicker
+                                                            .showPicker(
+                                                                context:
+                                                                    context);
+                                                    setState(() {
+                                                      countryCode = code;
+                                                    });
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        child: Text(
+                                                          countryCode?.code ??
+                                                              "ML",
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        child: Text(
+                                                          countryCode
+                                                                  ?.dialCode ??
+                                                              "+223",
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 5,
+                                                      ),
+                                                      Container(
+                                                        child: FaIcon(
+                                                          FontAwesomeIcons
+                                                              .caretDown,
+                                                          size: 15,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ),
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 8),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  final code =
-                                                      await countryPicker
-                                                          .showPicker(
-                                                              context: context);
-                                                  setState(() {
-                                                    countryCode = code;
-                                                  });
-                                                },
-                                                child: Row(
-                                                  children: [
-                                                    Container(
-                                                      child: Text(
-                                                        countryCode?.code ??
-                                                            "ML",
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Container(
-                                                      child: Text(
-                                                        countryCode?.dialCode ??
-                                                            "+223",
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    Container(
-                                                      child: FaIcon(
-                                                        FontAwesomeIcons
-                                                            .caretDown,
-                                                        size: 15,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
+                                          hintStyle: TextStyle(
+                                              color: Colors.grey[600],
+                                              fontWeight: FontWeight.w100),
                                         ),
-                                        labelStyle:
-                                            TextStyle(color: Colors.grey[600]),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                    "Ton numero de telephone servira à ameliorer ton"
-                                    "expérience sur TikTok, notamment en te mettant"
-                                    "en relation avec des personnes que tu connais "
-                                    "peut-être, en personnalisant tes publicités, etc. Si tu"
-                                    "t’inscris par SMS, des frais peuvent s’appliquer.En "
-                                    "savoir plus"),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  width: 300.0,
-                                  child: ElevatedButton(
-                                      style: ButtonStyle(
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  "Ton numero de telephone servira à ameliorer"
+                                                  "ton expérience sur TikTok, notamment en te mettant"
+                                                  "en relation avec des personnes que tu connais "
+                                                  "peut-être, en personnalisant tes publicités, etc. Si tu"
+                                                  "t’inscris par SMS, des frais peuvent s’appliquer. "),
+                                          TextSpan(
+                                              text: " En savoir plus",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Colors.black54,
+                                                  fontSize: 15))
+                                        ]),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 300.0,
+                                    child: ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                          Color.fromARGB(255, 220, 25, 11),
+                                        )),
+                                        onPressed: () {
+                                          if (countryCode != null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "${countryCode!.dialCode}-${phoneNumberController.text.trim()}")));
+                                          } else {}
+                                        },
+                                        child: const Text("Envoyer le code")),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: Center(
+                                      child: TextFormField(
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        textInputAction: TextInputAction.done,
+                                        maxLines: 1,
+                                        decoration: const InputDecoration(
+                                          border: UnderlineInputBorder(),
+                                          hintText: 'Adresse E-mail',
+                                          hintStyle: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w100),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  RichText(
+                                    text: TextSpan(
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                              text:
+                                                  "En continuant,vous acceptez les"),
+                                          TextSpan(
+                                              text: "conditions d'utilisation",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Colors.black54,
+                                                  fontSize: 15)),
+                                          TextSpan(
+                                              text:
+                                                  " de TiTok et confirmez que vous avez lu la "),
+                                          TextSpan(
+                                              text:
+                                                  "politique de confidentialité ",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: Colors.black54,
+                                                  fontSize: 15)),
+                                          TextSpan(text: "de TikTok"),
+                                        ]),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 350.0,
+                                    child: ElevatedButton(
+                                        style: ButtonStyle(
                                           backgroundColor:
                                               MaterialStateProperty.all(
-                                        Color.fromARGB(255, 220, 25, 11),
-                                      )),
-                                      onPressed: () {
-                                        if (countryCode != null) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "${countryCode!.dialCode}-${phoneNumberController.text.trim()}")));
-                                        } else {}
-                                      },
-                                      child: const Text("Envoyer le code")),
-                                )
-                              ],
-                            ),
-                            Column(
-                              children: [
-                                Container(
-                                  child: Center(
-                                    child: TextFormField(
-                                      keyboardType: TextInputType.emailAddress,
-                                      textInputAction: TextInputAction.done,
-                                      maxLines: 1,
-                                      decoration: const InputDecoration(
-                                        border: UnderlineInputBorder(),
-                                        labelText: 'Adresse E-mail',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                    "En continuant,vous acceptez les conditions d'utilisation de TiTok"
-                                    "et confirmez que vous avez lu la politique de confidentialité de TikTok"),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                SizedBox(
-                                  width: 350.0,
-                                  child: ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Color.fromARGB(255, 220, 25, 11),
+                                            Color.fromARGB(255, 220, 25, 11),
+                                          ),
                                         ),
-                                      ),
-                                      onPressed: () {
-                                        if (countryCode != null) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                                  content: Text(
-                                                      "${countryCode!.dialCode}-${phoneNumberController.text.trim()}")));
-                                        } else {}
-                                      },
-                                      child: Text("Suivant")),
-                                )
-                              ],
+                                        onPressed: () {
+                                          if (countryCode != null) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(SnackBar(
+                                                    content: Text(
+                                                        "${countryCode!.dialCode}-${phoneNumberController.text.trim()}")));
+                                          } else {}
+                                        },
+                                        child: Text("Suivant")),
+                                  )
+                                ],
+                              ),
                             ),
                           ]))
                     ])),

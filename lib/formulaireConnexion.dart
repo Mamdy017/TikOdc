@@ -1,4 +1,5 @@
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,66 +23,59 @@ class _PageFormulaireConnexionState extends State<PageFormulaireConnexion> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TikOdc',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: Colors.white,
-      ),
-      home: Scaffold(
-        body: Container(
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
-                  Widget>[
-            SizedBox(height: 20.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    FontAwesomeIcons.leftLong,
-                  ),
-                ),
-                Text(
-                  "S'inscrire",
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    decorationColor: Colors.white,
-                  ),
-                ),
-                Icon(
-                  FontAwesomeIcons.circleQuestion,
-                ),
-              ],
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+         leading: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
             ),
-            DefaultTabController(
-                length: 2, // length of tabs
-                initialIndex: 0,
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Container(
-                        child: TabBar(
-                          indicatorColor: Colors.black,
-                          labelColor: Colors.black,
-                          unselectedLabelColor: Colors.black,
-                          tabs: [
-                            Tab(text: 'Téléphone'),
-                            Tab(text: 'E-mail'),
-                          ],
-                        ),
+          ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Center(
+          child: Text(
+            "Connexion",
+            style: TextStyle(color: Colors.black, fontSize: 18),
+          ),
+        ),
+        actions: [
+          Icon(
+            CupertinoIcons.question_circle,
+            color: Colors.black,
+          )
+        ],
+      ),
+      body: Container(
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: <
+                Widget>[
+          DefaultTabController(
+              length: 2, // length of tabs
+              initialIndex: 0,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Container(
+                      child: TabBar(
+                        indicatorColor: Colors.black,
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.black,
+                        tabs: [
+                          Tab(text: 'Téléphone'),
+                          Tab(text: 'E-mail'),
+                        ],
                       ),
-                      SizedBox(
-                        height: 80,
-                      ),
-                      Container(
+                    ),
+                    SizedBox(
+                      height: 80,
+                    ),
+                    Padding(
+                       padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Container(
                           height: 290, //height of TabBarView
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  top: BorderSide(
-                                      color: Colors.grey, width: 0.5))),
                           child: TabBarView(children: <Widget>[
                             Column(
                               children: [
@@ -97,20 +91,19 @@ class _PageFormulaireConnexionState extends State<PageFormulaireConnexion> {
                                         labelText: 'Numéro de téléphone',
                                         prefixIcon: Container(
                                           padding: const EdgeInsets.symmetric(
-                                            horizontal: 15,
+                                            horizontal: 1,
                                             vertical: 6,
                                           ),
                                           margin: const EdgeInsets.symmetric(
-                                              horizontal: 8),
+                                              horizontal: 0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               GestureDetector(
                                                 onTap: () async {
-                                                  final code =
-                                                      await countryPicker
-                                                          .showPicker(
-                                                              context: context);
+                                                  final code = await countryPicker
+                                                      .showPicker(
+                                                          context: context);
                                                   setState(() {
                                                     countryCode = code;
                                                   });
@@ -119,8 +112,7 @@ class _PageFormulaireConnexionState extends State<PageFormulaireConnexion> {
                                                   children: [
                                                     Container(
                                                       child: Text(
-                                                        countryCode?.code ??
-                                                            "ML",
+                                                        countryCode?.code ?? "ML",
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -198,13 +190,12 @@ class _PageFormulaireConnexionState extends State<PageFormulaireConnexion> {
                                 Container(
                                   child: Center(
                                     child: TextFormField(
-                                      keyboardType:
-                                          TextInputType.visiblePassword,
+                                      keyboardType: TextInputType.visiblePassword,
                                       textInputAction: TextInputAction.done,
                                       maxLines: 1,
                                       decoration: const InputDecoration(
                                         border: UnderlineInputBorder(),
-                                        labelText: '   Mot de passe',
+                                        labelText: 'Mot de passe',
                                       ),
                                     ),
                                   ),
@@ -251,10 +242,10 @@ class _PageFormulaireConnexionState extends State<PageFormulaireConnexion> {
                                 )
                               ],
                             ),
-                          ]))
-                    ])),
-          ]),
-        ),
+                          ])),
+                    )
+                  ])),
+        ]),
       ),
     );
   }
